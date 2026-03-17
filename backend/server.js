@@ -7,6 +7,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
 const meetingRoutes = require('./routes/meeting');
 const documentRoutes = require('./routes/document');
+const paymentRoutes = require('./routes/payment');
 
 // Load environment variables
 dotenv.config();
@@ -34,6 +35,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/meetings', meetingRoutes);
 app.use('/api/documents', documentRoutes);
+app.use('/api/payment', paymentRoutes);
 
 // Test route
 app.get('/', (req, res) => {
