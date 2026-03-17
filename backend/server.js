@@ -8,6 +8,7 @@ const authRoutes = require('./routes/auth');
 const meetingRoutes = require('./routes/meeting');
 const documentRoutes = require('./routes/document');
 const paymentRoutes = require('./routes/payment');
+const twofaRoutes = require('./routes/twofa');
 
 // Load environment variables
 dotenv.config();
@@ -36,6 +37,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/meetings', meetingRoutes);
 app.use('/api/documents', documentRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/2fa', twofaRoutes);
 
 // Test route
 app.get('/', (req, res) => {

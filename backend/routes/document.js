@@ -244,4 +244,28 @@ router.delete('/:id', authMiddleware, async (req, res) => {
   }
 });
 
+// Serve document for preview
+router.get('/:id/preview', authMiddleware, async (req, res) => {
+  try {
+    const document = await Document.findById(req.params.id);
+
+    if (!document) {
+      return res.status(404).json({ message: 'Document not found' });
+    }
+
+    // Check if user has access
+    const hasAccess = 
+      document.uploadedBy.toString() === req.user.userId ||
+      document.sharedWith.some(s => s.user.toString() === req.user.userId);
+
+    if (!hasAccess) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    res.sendFile(document.filePath);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 module.exports = router;
