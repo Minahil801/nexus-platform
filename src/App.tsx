@@ -3,6 +3,9 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
+import MeetingsPage from './pages/meetings/MeetingsPage';
+import DocumentsPage from './pages/documents/DocumentsPage';
+import PaymentsPage from './pages/payments/PaymentsPage';
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { isAuthenticated, loading } = useAuth();
@@ -19,6 +22,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+          {/* Public Routes */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           
@@ -28,6 +32,33 @@ function App() {
             element={
               <PrivateRoute>
                 <DashboardPage />
+              </PrivateRoute>
+            } 
+          />
+
+          <Route 
+            path="/meetings" 
+            element={
+              <PrivateRoute>
+                <MeetingsPage />
+              </PrivateRoute>
+            } 
+          />
+
+          <Route 
+            path="/documents" 
+            element={
+              <PrivateRoute>
+                <DocumentsPage />
+              </PrivateRoute>
+            } 
+          />
+
+          <Route 
+            path="/payments" 
+            element={
+              <PrivateRoute>
+                <PaymentsPage />
               </PrivateRoute>
             } 
           />

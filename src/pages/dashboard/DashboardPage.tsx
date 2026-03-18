@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { meetingAPI } from '../../api/meeting';
 import { documentAPI } from '../../api/document';
 import { paymentAPI } from '../../api/payment';
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [meetings, setMeetings] = useState<any[]>([]);
   const [documents, setDocuments] = useState<any[]>([]);
@@ -23,9 +25,9 @@ export default function DashboardPage() {
         paymentAPI.getTransactionHistory()
       ]);
 
-      setMeetings(meetingsData.slice(0, 5)); // Latest 5
-      setDocuments(documentsData.slice(0, 5)); // Latest 5
-      setTransactions(transactionsData.slice(0, 5)); // Latest 5
+      setMeetings(meetingsData.slice(0, 5));
+      setDocuments(documentsData.slice(0, 5));
+      setTransactions(transactionsData.slice(0, 5));
     } catch (error) {
       console.error('Error loading dashboard:', error);
     } finally {
@@ -69,7 +71,15 @@ export default function DashboardPage() {
           
           {/* Meetings Card */}
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Recent Meetings</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold">Recent Meetings</h2>
+              <button 
+                onClick={() => navigate('/meetings')}
+                className="text-blue-600 text-sm hover:underline"
+              >
+                View All
+              </button>
+            </div>
             {meetings.length === 0 ? (
               <p className="text-gray-500 text-sm">No meetings yet</p>
             ) : (
@@ -88,7 +98,15 @@ export default function DashboardPage() {
 
           {/* Documents Card */}
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Recent Documents</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold">Recent Documents</h2>
+              <button 
+                onClick={() => navigate('/documents')}
+                className="text-blue-600 text-sm hover:underline"
+              >
+                View All
+              </button>
+            </div>
             {documents.length === 0 ? (
               <p className="text-gray-500 text-sm">No documents yet</p>
             ) : (
@@ -107,7 +125,15 @@ export default function DashboardPage() {
 
           {/* Transactions Card */}
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold">Recent Transactions</h2>
+              <button 
+                onClick={() => navigate('/payments')}
+                className="text-blue-600 text-sm hover:underline"
+              >
+                View All
+              </button>
+            </div>
             {transactions.length === 0 ? (
               <p className="text-gray-500 text-sm">No transactions yet</p>
             ) : (
@@ -130,16 +156,28 @@ export default function DashboardPage() {
         <div className="mt-8 bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <button className="p-4 border rounded hover:bg-gray-50">
+            <button 
+              onClick={() => navigate('/meetings')}
+              className="p-4 border rounded hover:bg-gray-50 transition"
+            >
               📅 Schedule Meeting
             </button>
-            <button className="p-4 border rounded hover:bg-gray-50">
+            <button 
+              onClick={() => navigate('/documents')}
+              className="p-4 border rounded hover:bg-gray-50 transition"
+            >
               📄 Upload Document
             </button>
-            <button className="p-4 border rounded hover:bg-gray-50">
+            <button 
+              onClick={() => navigate('/payments')}
+              className="p-4 border rounded hover:bg-gray-50 transition"
+            >
               💰 Make Payment
             </button>
-            <button className="p-4 border rounded hover:bg-gray-50">
+            <button 
+              onClick={() => navigate('/dashboard')}
+              className="p-4 border rounded hover:bg-gray-50 transition"
+            >
               📊 View Reports
             </button>
           </div>
