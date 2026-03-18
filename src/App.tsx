@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
-// Import other pages as needed
+import DashboardPage from './pages/dashboard/DashboardPage';
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { isAuthenticated, loading } = useAuth();
@@ -27,9 +27,7 @@ function App() {
             path="/dashboard" 
             element={
               <PrivateRoute>
-                <div className="min-h-screen flex items-center justify-center">
-                  <h1 className="text-3xl font-bold">Dashboard - Coming Soon!</h1>
-                </div>
+                <DashboardPage />
               </PrivateRoute>
             } 
           />
