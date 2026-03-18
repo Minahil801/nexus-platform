@@ -494,6 +494,9 @@ nexus-platform/
 ---
 
 ## 🔗 Important Links
+**API Collection:** See `API_DOCUMENTATION.json`
+- **Live Frontend:** https://platform-nexus.netlify.app
+- **Live Backend:** Locally hosted (code ready for deployment)
 
 - **GitHub Repository:** https://github.com/Minahil801/nexus-platform
 - **API Collection:** See `API_DOCUMENTATION.json`
@@ -611,6 +614,7 @@ For questions, issues, or feedback:
 6. Test endpoints with authentication
 
 ---
+ 
 
 **Project Status:** ✅ **Production Ready**  
 **Last Updated:** March 19, 2026  
